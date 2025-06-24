@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # 3th-party
     "django_extensions",
     # app
+    "products.apps.ProductsConfig"
 ]
 
 MIDDLEWARE = [
