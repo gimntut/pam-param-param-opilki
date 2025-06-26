@@ -7,11 +7,13 @@ class ProductDTO(TypedDict):
     name: str
     price: Decimal
     price_with_discount: Decimal
-    rate: Decimal
+    rating: Decimal
     review_count: int
+
 
 ProductDtoMap: TypeAlias = dict[str, ProductDTO]
 
+
 class IWbSdk(Protocol):
-    def search(self, text:str) -> ProductDtoMap:
+    def search(self, text: str) -> ProductDtoMap:
         pass

@@ -24,7 +24,13 @@ class ProductUpdater:
         with transaction.atomic():
             update_count = Product.objects.bulk_update(
                 update_products,
-                fields=["name", "price", "price_with_discount", "rate", "review_count"],
+                fields=[
+                    "name",
+                    "price",
+                    "price_with_discount",
+                    "rating",
+                    "review_count",
+                ],
             )
             event_bus.push(ProductsUpdateEvent(update_count))
 
