@@ -27,10 +27,6 @@ class ProductListView(ListView):
         queryset = self.filter_backend.filter_queryset(self.request, queryset, self)
         return queryset
 
-    def render_to_response(self, context, **response_kwargs):
-        print(context)
-        return super().render_to_response(context, **response_kwargs)
-
 
 class ChartView(TemplateView):
     template_name = "products/chart.html"

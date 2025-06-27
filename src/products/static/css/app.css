@@ -1,0 +1,22 @@
+td, th {
+    padding: 4px 8px;
+}
+
+th {
+    background-color: #333;
+    color: white;
+}
+
+td {
+    background-color: #eee;
+}
+
+label {
+    display: inline-block;
+    width: 200px;
+}
+
+.form-row {
+    padding:4px;
+    margin: 4px;
+}

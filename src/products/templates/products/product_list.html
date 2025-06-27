@@ -1,6 +1,23 @@
 {% extends 'products/base.html' %}
 {% block content %}
     <a href="{% url 'chart' %}">Перейти к графику</a>
+    <form action=".">
+        <div class="form-row">
+            <label for="min_price">Мин цена со скидкой</label>
+            <input id="min_price" name="min_price" type="number"></div>
+        <div class="form-row">
+            <label for="max_price">Макс цена со скидкой</label>
+            <input id="max_price" name="max_price" type="number" value="100">
+        </div>
+        <div class="form-row">
+            <label for="min_rating">Мин рейтинг</label>
+            <input id="min_rating" name="min_rating" type="number"></div>
+        <div class="form-row">
+            <label for="min_review_count">Макс рейтинг</label>
+            <input id="min_review_count" name="min_review_count" type="number">
+        </div>
+        <button type="submit">Применить</button>
+    </form>
     <table class="products">
         <tr>
             <th>Название товара</th>
@@ -22,17 +39,17 @@
     <div class="pagination">
     <span class="step-links">
         {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            <a href="{% querystring page=1 %}">⏮</a>
+            <a href="{% querystring page=page_obj.previous_page_number %}">◀</a>
         {% endif %}
 
         <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
         </span>
 
         {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            <a href="{% querystring page=page_obj.next_page_number %}">▶</a>
+            <a href="{% querystring page=page_obj.num_pages %}">⏭</a>
         {% endif %}
     </span>
     </div>
