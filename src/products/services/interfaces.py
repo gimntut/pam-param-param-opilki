@@ -1,12 +1,12 @@
-from typing import Protocol, TypeAlias, TypedDict, Mapping, NotRequired
 from decimal import Decimal
+from typing import Protocol, TypeAlias, TypedDict, NotRequired
 
 
 class ProductDTO(TypedDict):
     id: NotRequired[int]
     name: str
     price: Decimal
-    price_with_discount: Decimal
+    discount_price: Decimal
     rating: Decimal
     review_count: int
 

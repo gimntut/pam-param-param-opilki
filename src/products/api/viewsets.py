@@ -1,5 +1,5 @@
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, pagination
 from rest_framework.mixins import ListModelMixin
 
 from . import serializers, filtersets
@@ -13,3 +13,4 @@ class ProductViewSet(ListModelMixin, viewsets.GenericViewSet):
     filter_backends = (DjangoFilterBackend,)
     serializer_class = serializers.ProductSerializer
     filterset_class = filtersets.ProductFilterSet
+    pagination_class = pagination.PageNumberPagination

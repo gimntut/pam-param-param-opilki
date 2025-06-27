@@ -27,7 +27,7 @@ class ProductUpdater:
                 fields=[
                     "name",
                     "price",
-                    "price_with_discount",
+                    "discount_price",
                     "rating",
                     "review_count",
                 ],

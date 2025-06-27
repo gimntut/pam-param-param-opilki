@@ -4,7 +4,7 @@ from django.core.management.base import BaseCommand
 
 from products.sdk.wb.file_sdk import FileWbSdk
 from products.services.events import ProductsCreateEvent, ProductsUpdateEvent
-from products.services.parser import ProductUpdater
+from products.services.product_updater import ProductUpdater
 
 
 class Command(BaseCommand):
