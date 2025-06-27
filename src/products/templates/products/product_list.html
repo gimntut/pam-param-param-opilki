@@ -4,17 +4,19 @@
     <form action=".">
         <div class="form-row">
             <label for="min_price">Мин цена со скидкой</label>
-            <input id="min_price" name="min_price" type="number"></div>
+            {{ filter_form.min_price }}
+        </div>
         <div class="form-row">
             <label for="max_price">Макс цена со скидкой</label>
-            <input id="max_price" name="max_price" type="number" value="100">
+            {{ filter_form.max_price }}
         </div>
         <div class="form-row">
             <label for="min_rating">Мин рейтинг</label>
-            <input id="min_rating" name="min_rating" type="number"></div>
+            {{ filter_form.min_rating }}
+        </div>
         <div class="form-row">
             <label for="min_review_count">Макс рейтинг</label>
-            <input id="min_review_count" name="min_review_count" type="number">
+            {{ filter_form.min_review_count }}
         </div>
         <button type="submit">Применить</button>
     </form>
