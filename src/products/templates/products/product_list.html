@@ -1,6 +1,7 @@
 {% extends 'products/base.html' %}
 {% block content %}
     <a href="{% url 'chart' %}">Перейти к графику</a>
+    <h1>Товары</h1>
     {% include 'products/partials/filterset.html' %}
     <div id='product-table'>
         {% include 'products/partials/product_table.html' %}
