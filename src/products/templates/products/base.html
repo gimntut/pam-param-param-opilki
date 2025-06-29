@@ -1,13 +1,15 @@
-{% load static %}
+{% load static django_htmx %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{{ tile }}</title>
-    <script src="{% static 'vendor/htmx/js/htmx.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/no-ui-slider/css/nouislider.min.css' %}">
+    {% htmx_script %}
+    <script src="{% static 'vendor/no-ui-slider/js/nouislider.min.js' %}"></script>
 </head>
-<body hx-boost="true">
+<body hx-headers='{"x-csrftoken": "{{ csrf_token }}"}'>
 {% block content %}{% endblock %}
 </body>
 </html>

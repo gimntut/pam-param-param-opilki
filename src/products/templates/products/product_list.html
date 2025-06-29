@@ -1,58 +1,8 @@
 {% extends 'products/base.html' %}
 {% block content %}
     <a href="{% url 'chart' %}">Перейти к графику</a>
-    <form action=".">
-        <div class="form-row">
-            <label for="min_price">Мин цена со скидкой</label>
-            {{ filter_form.min_price }}
-        </div>
-        <div class="form-row">
-            <label for="max_price">Макс цена со скидкой</label>
-            {{ filter_form.max_price }}
-        </div>
-        <div class="form-row">
-            <label for="min_rating">Мин рейтинг</label>
-            {{ filter_form.min_rating }}
-        </div>
-        <div class="form-row">
-            <label for="min_review_count">Макс рейтинг</label>
-            {{ filter_form.min_review_count }}
-        </div>
-        <button type="submit">Применить</button>
-    </form>
-    <table class="products">
-        <tr>
-            <th>Название товара</th>
-            <th>Цена</th>
-            <th>Цена со скидкой</th>
-            <th>Рейтинг</th>
-            <th>Количество отзывов</th>
-        </tr>
-        {% for product in page_obj %}
-            <tr class="product">
-                <td>{{ product.name }}</td>
-                <td>{{ product.price }}</td>
-                <td>{{ product.discount_price }}</td>
-                <td>{{ product.rating }}</td>
-                <td>{{ product.review_count }}</td>
-            </tr>
-        {% endfor %}
-    </table>
-    <div class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a href="{% querystring page=1 %}">⏮</a>
-            <a href="{% querystring page=page_obj.previous_page_number %}">◀</a>
-        {% endif %}
-
-        <span class="current">
-            Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
-        </span>
-
-        {% if page_obj.has_next %}
-            <a href="{% querystring page=page_obj.next_page_number %}">▶</a>
-            <a href="{% querystring page=page_obj.num_pages %}">⏭</a>
-        {% endif %}
-    </span>
+    {% include 'products/partials/filterset.html' %}
+    <div id='product-table'>
+        {% include 'products/partials/product_table.html' %}
     </div>
 {% endblock %}

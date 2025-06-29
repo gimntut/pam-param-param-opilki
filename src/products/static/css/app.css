@@ -3,12 +3,16 @@ td, th {
 }
 
 th {
-    background-color: #333;
+    background-color: #777;
     color: white;
 }
 
 td {
     background-color: #eee;
+}
+
+.products {
+    margin-top: 12px;
 }
 
 .form-row > label {
@@ -23,4 +27,25 @@ td {
 .form-row {
     padding: 4px;
     margin: 4px;
+}
+
+.products-not-found {
+    display: inline-block;
+    width: 80%;
+    margin: auto;
+    font-weight: bold;
+    font-size: large;
+    color: #2a6496;
+    padding: 16px;
+    text-align: center;
+}
+
+#price-slider {
+    display: inline-block;
+    width: calc(95% - 200px);
+    margin: 0;
+}
+
+.hidden {
+    display: none;
 }

@@ -15,5 +15,5 @@ class WbSize(TypedDict):
 class WbProduct(TypedDict):
     name: str
     sizes: list[WbSize]
-    reviewRating: float
+    rating: float
     feedbacks: int

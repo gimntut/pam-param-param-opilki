@@ -19,8 +19,7 @@ def get_product_dto_map(product_item: WbProduct) -> ProductDtoMap:
             name=sub_name,
             price=Decimal(prices["basic"]) / 100,
             discount_price=Decimal(prices["product"]) / 100,
-            # По-хорошему, нужно было брать rating, но reviewRating интереснее
-            rating=Decimal(product_item["reviewRating"]),
+            rating=Decimal(product_item["rating"]),
             review_count=product_item["feedbacks"],
         )
         result[sub_name] = sub_product_item

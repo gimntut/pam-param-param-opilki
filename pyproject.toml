@@ -16,6 +16,7 @@ dependencies = [
 [dependency-groups]
 dev = [
     "django-stubs[compatible-mypy]>=5.2.1",
+    "ipython>=9.3.0",
 ]
 
 [tool.mypy]

@@ -1,0 +1,38 @@
+<h1>Фильтры</h1>
+<form action="." hx-get="." hx-target="#product-table" hx-push-url="true">
+    <div class="form-row">
+        <label>Цена</label>
+        <div id="price-slider"></div>
+    </div>
+    <div class="hidden">
+        {{ filter_form.min_price }}
+        {{ filter_form.max_price }}
+    </div>
+    <div class="form-row">
+        <label for="min_rating">Рейтинг (минимум)</label>
+        {{ filter_form.min_rating }}
+    </div>
+    <div class="form-row">
+        <label for="min_review_count">Отзывы (минимум)</label>
+        {{ filter_form.min_review_count }}
+    </div>
+    <button type="submit">Применить фильтр</button>
+</form>
+<script>
+    const min_price_el = document.getElementById('id_min_price');
+    const max_price_el = document.getElementById('id_max_price');
+    function updateInputs(values) {
+        min_price_el.value = values[0];
+        max_price_el.value = values[1];
+   }
+
+    const tooltipSlider = document.getElementById('price-slider');
+
+    const slider = noUiSlider.create(tooltipSlider, {
+        start: [{{ filter_form.min_price.value|default_if_none:available_min_price }}, {{ filter_form.max_price.value|default_if_none:available_max_price }}],
+        tooltips: [true, true],
+        range: {'min': {{ available_min_price }}, 'max': {{ available_max_price }}},
+        connect: [false, true, false],
+    });
+    slider.on('set', updateInputs);
+</script>

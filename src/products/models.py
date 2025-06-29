@@ -10,9 +10,7 @@ class Product(models.Model):
     discount_price = models.DecimalField(
         _("Цена со скидкой"), max_digits=10, decimal_places=2
     )
-    rating = models.DecimalField(
-        _("Рейтинг"), max_digits=3, decimal_places=1, null=True, blank=True
-    )
+    rating = models.IntegerField(_("Рейтинг"), null=True, blank=True)
     review_count = models.IntegerField(_("Количество отзывов"), null=True, blank=True)
 
     class Meta:
