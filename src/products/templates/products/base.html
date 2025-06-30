@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'vendor/no-ui-slider/css/nouislider.min.css' %}">
     {% htmx_script %}
     <script src="{% static 'vendor/no-ui-slider/js/nouislider.min.js' %}"></script>
+    {% block scripts %}{% endblock %}
 </head>
 <body hx-headers='{"x-csrftoken": "{{ csrf_token }}"}'>
 {% block content %}{% endblock %}
