@@ -1,13 +1,13 @@
 from dataclasses import dataclass
-from typing import TypeVar, Callable, Type
+from typing import Type
 
-T = TypeVar("T", bound="BaseEvent")
+from utils.event_bus.types import EventHandler
 
 
 @dataclass
 class Subscribe:
-    event_class: "BaseEvent"
-    handler: Callable
+    event_class: Type["BaseEvent"]
+    handler: EventHandler
 
     def enable(self) -> None:
         self.event_class.register(self.handler)
@@ -16,10 +16,11 @@ class Subscribe:
         self.event_class.register(self.handler)
 
 
-@dataclass
 class BaseEvent:
+    _handlers: set[EventHandler]
+
     @classmethod
-    def register(cls: Type[T], handler: Callable[[T], None]) -> Subscribe:
+    def register(cls, handler: EventHandler) -> Subscribe:
         assert cls is not BaseEvent, "Класс события должен наследоваться от BaseEvent"
         if not hasattr(cls, "_handlers"):
             cls._handlers = set()
@@ -27,13 +28,13 @@ class BaseEvent:
         return Subscribe(event_class=cls, handler=handler)
 
     @classmethod
-    def unregister(cls: Type[T], handler: Callable[[T], None]) -> None:
+    def unregister(cls, handler: EventHandler) -> None:
         if not hasattr(cls, "_handlers"):
             cls._handlers = set()
         cls._handlers.remove(handler)
 
     @classmethod
-    def do(cls, event: T) -> None:
+    def do(cls, event: "BaseEvent") -> None:
         for handler in getattr(cls, "_handlers", []):
             handler(event)
 

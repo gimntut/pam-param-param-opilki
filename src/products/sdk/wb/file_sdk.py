@@ -1,16 +1,16 @@
 import json
+from dataclasses import dataclass
 from pathlib import Path
 
 from products.sdk.wb.helpers import get_product_dto_map
 from products.services.interfaces import IWbSdk, ProductDtoMap
-from dataclasses import dataclass
 
 
 @dataclass
 class FileWbSdk(IWbSdk):
-    filename: str = None
+    filename: str | None = None
 
-    def search(self, search: str) -> ProductDtoMap:
+    def search(self, text: str) -> ProductDtoMap:
         if self.filename:
             boots_file = Path(self.filename)
         else:
