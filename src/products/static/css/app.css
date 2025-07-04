@@ -15,7 +15,7 @@ td {
     margin-top: 12px;
 }
 
-.form-row > label {
+.form-row > label, .form-row > .label {
     display: inline-block;
     width: 200px;
 }
@@ -48,4 +48,14 @@ td {
 
 .hidden {
     display: none;
+}
+
+.chart {
+    display: inline-block;
+    height: 100px;
+    width: 45%;
+}
+
+.charts {
+    max-height: 200px;
 }

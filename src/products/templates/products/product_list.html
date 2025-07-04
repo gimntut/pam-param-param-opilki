@@ -1,8 +1,12 @@
 {% extends 'products/base.html' %}
+{% load static %}
+{% block scripts %}
+    <script src="{% static 'vendor/apexcharts/js/apexcharts.js' %}"></script>
+{% endblock %}
 {% block content %}
-    <a href="{% url 'chart' %}">Перейти к графику</a>
     <h1>Товары</h1>
     {% include 'products/partials/filterset.html' %}
+    {% include 'products/partials/charts.html' %}
     <div id='product-table'>
         {% include 'products/partials/product_table.html' %}
     </div>

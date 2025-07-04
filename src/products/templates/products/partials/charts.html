@@ -1,0 +1,18 @@
+<div class="charts">
+    <div id="bar-chart" class="chart"></div>
+    <div id="line-chart" class="chart"></div>
+</div>
+<script>
+    const bar_options = {
+        chart: {
+            id: 'barChart',
+            type: 'bar',
+            height: '200px',
+        },
+        series: [{
+            data: []
+        }]
+    }
+    const chart = new ApexCharts(document.querySelector("#bar-chart"), bar_options);
+    chart.render();
+</script>

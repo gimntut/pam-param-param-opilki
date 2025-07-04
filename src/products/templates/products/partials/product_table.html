@@ -37,3 +37,6 @@
 {% else %}
     <div class="products-not-found">Не найдены товары подходящие под фильтр</div>
 {% endif %}
+<script>
+    ApexCharts.exec('barChart', 'updateSeries', {{bar_series}})
+</script>

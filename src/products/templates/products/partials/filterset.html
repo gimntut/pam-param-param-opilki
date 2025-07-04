@@ -1,7 +1,7 @@
 <h2>Фильтры</h2>
 <form action="." hx-get="." hx-target="#product-table" hx-push-url="true">
     <div class="form-row">
-        <label>Цена</label>
+        <span class="label">Цена</span>
         <div id="price-slider"></div>
     </div>
     <div class="hidden">
@@ -9,11 +9,11 @@
         {{ filter_form.max_price }}
     </div>
     <div class="form-row">
-        <label for="min_rating">Рейтинг (минимум)</label>
+        <label for="id_min_rating">Рейтинг (минимум)</label>
         {{ filter_form.min_rating }}
     </div>
     <div class="form-row">
-        <label for="min_review_count">Отзывы (минимум)</label>
+        <label for="id_min_review_count">Отзывы (минимум)</label>
         {{ filter_form.min_review_count }}
     </div>
     <button type="submit">Применить фильтр</button>
@@ -29,9 +29,9 @@
     const tooltipSlider = document.getElementById('price-slider');
 
     const slider = noUiSlider.create(tooltipSlider, {
-        start: [{{ filter_form.min_price.value|default_if_none:available_min_price }}, {{ filter_form.max_price.value|default_if_none:available_max_price }}],
+        start: [{{ filter_form.min_price.value|default_if_none:min_available_price }}, {{ filter_form.max_price.value|default_if_none:max_available_price }}],
         tooltips: [true, true],
-        range: {'min': {{ available_min_price }}, 'max': {{ available_max_price }}},
+        range: {'min': {{ min_available_price }}, 'max': {{ max_available_price }}},
         connect: [false, true, false],
     });
     slider.on('set', updateInputs);
