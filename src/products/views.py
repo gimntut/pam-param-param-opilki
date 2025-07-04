@@ -49,7 +49,6 @@ class ProductListView(ListView):
 
     @staticmethod
     def get_bar_series(qs, min_available_price, max_available_price) -> list[BarSeries]:
-        print(settings.LOGGING)
         delta = max_available_price - min_available_price
         bar_delta = delta / BAR_COUNT
         aggregates = {}

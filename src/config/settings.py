@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "drf_spectacular_sidecar",
     "django_htmx",
+    "crispy_forms",
     # app
     "products.apps.ProductsConfig",
 ]

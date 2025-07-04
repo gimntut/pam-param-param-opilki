@@ -1,5 +1,5 @@
-<h2>Фильтры</h2>
-<form action="." hx-get="." hx-target="#product-table" hx-push-url="true" hx-trigger="changed">
+{% load crispy_forms_field %}
+<form action="." hx-get="." hx-target="#product-table" hx-push-url="true" hx-trigger="change from:(input,select) delay:0.3s">
     <div class="form-row">
         <span class="label">Цена</span>
         <div id="price-slider"></div>
@@ -16,7 +16,7 @@
         <label for="id_min_review_count">Отзывы (минимум)</label>
         {{ filter_form.min_review_count }}
     </div>
-    <button type="submit">Применить фильтр</button>
+    {% comment %} <button type="submit">Применить фильтр</button> {% endcomment %}
 </form>
 <script>
     const min_price_el = document.getElementById('id_min_price');
@@ -24,6 +24,9 @@
     function updateInputs(values) {
         min_price_el.value = values[0];
         max_price_el.value = values[1];
+
+        const event = new Event('change', {bubbles: true, cancelable: false});
+        min_price_el.dispatchEvent(event);
    }
 
     const tooltipSlider = document.getElementById('price-slider');
