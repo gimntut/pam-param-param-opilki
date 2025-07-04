@@ -1,14 +1,15 @@
 import json
 
+from django.conf import settings
 from django.core.paginator import Paginator
-from django.db.models import Min, Max, Count, Q
+from django.db.models import Min, Max, Count, Q, Avg
 from django.utils.safestring import mark_safe
 from django.views.generic import ListView
 
 from products.api.filtersets import ProductFilterSet
 from products.backends import FilterBackend
 from products.models import Product
-from products.types import BarSeries
+from products.types import BarSeries, LineSeries
 from utils.types import HttpRequest
 
 BAR_COUNT = 10
@@ -34,20 +35,21 @@ class ProductListView(ListView):
             min_available_price=Min("price"),
             max_available_price=Max("price"),
         )
-        get_bar_series = None
+        bar_series = line_series = None
         if all(price_range.values()):
-            get_bar_series = mark_safe(
-                json.dumps(self.get_bar_series(qs, **price_range))
-            )
+            bar_series = mark_safe(json.dumps(self.get_bar_series(qs, **price_range)))
+            line_series = mark_safe(json.dumps(self.get_line_series(qs)))
         return super().get_context_data(
             object_list=object_list,
             filter_form=self.form,
-            bar_series=get_bar_series,
+            bar_series=bar_series,
+            line_series=line_series,
             **price_range,
         )
 
     @staticmethod
     def get_bar_series(qs, min_available_price, max_available_price) -> list[BarSeries]:
+        print(settings.LOGGING)
         delta = max_available_price - min_available_price
         bar_delta = delta / BAR_COUNT
         aggregates = {}
@@ -59,6 +61,26 @@ class ProductListView(ListView):
             )
         prices = qs.aggregate(**aggregates)
         data = [{"x": x, "y": y} for x, y in prices.items()]
+        return [{"data": data}]
+
+    @staticmethod
+    def get_line_series(qs) -> list[LineSeries]:
+        aggregates = {}
+        for rating in range(1, 6):
+            avg_filter = Q(rating=rating)
+            aggregates[f"price_{rating}"] = Avg("price", filter=avg_filter)
+            aggregates[f"discount_price_{rating}"] = Avg(
+                "discount_price", filter=avg_filter
+            )
+        aggregated_discounts = qs.aggregate(**aggregates)
+        # Не самый хороший алгоритм вычисления скидки по рейтингу,
+        # но так как в задаче алгоритм не описан, то пусть будет так
+        data = []
+        for rating in range(1, 6):
+            avg_price = aggregated_discounts[f"price_{rating}"] or 1
+            avg_discount_price = aggregated_discounts[f"discount_price_{rating}"] or 0
+            discount = 100 - ((avg_price - avg_discount_price) / avg_price * 100)
+            data.append({"x": str(rating), "y": round(discount)})
         return [{"data": data}]
 
     def get_template_names(self):

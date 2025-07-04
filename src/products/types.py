@@ -12,4 +12,5 @@ class BarSeries(TypedDict):
     data: list[BarData]
 
 
-x: BarSeries = {"data": [{"x": "abc", "y": 1}]}
+class LineSeries(TypedDict):
+    data: list[BarData]

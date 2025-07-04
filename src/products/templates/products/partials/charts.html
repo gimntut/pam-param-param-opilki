@@ -9,10 +9,22 @@
             type: 'bar',
             height: '200px',
         },
-        series: [{
-            data: []
-        }]
+        series: [{data: []}]
     }
-    const chart = new ApexCharts(document.querySelector("#bar-chart"), bar_options);
-    chart.render();
+    const line_options = {
+        chart: {
+            id: 'lineChart',
+            type: 'line',
+            height: '200px',
+        },
+        xaxis: {
+            min: 1,
+            max: 5,
+        },
+        series: [{data: []}]
+    }
+    const barChart = new ApexCharts(document.querySelector("#bar-chart"), bar_options);
+    barChart.render();
+    const lineChart = new ApexCharts(document.querySelector("#line-chart"), line_options);
+    lineChart.render();
 </script>
