@@ -1,7 +1,7 @@
 from typing import TYPE_CHECKING
 
 
-class EventHandler("BaseEvent"):
+class EventHandler:
     def __call__(self, event: "BaseEvent") -> None: ...
 
 

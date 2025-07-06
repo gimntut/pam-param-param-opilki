@@ -133,7 +133,7 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"
     ],
 }
-
+SHOW_SQL = False
 SPECTACULAR_SETTINGS = {
     "TITLE": "WB Products",
     "VERSION": "1.0.0",
@@ -162,7 +162,7 @@ LOGGING = {
     },
     "loggers": {
         "django.db": {
-            "level": "DEBUG" if DEBUG else "INFO",
+            "level": "DEBUG" if SHOW_SQL else "INFO",
             "handlers": ["console"],
             "propagate": False,
         },

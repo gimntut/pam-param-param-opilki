@@ -2,7 +2,7 @@ from typing import TYPE_CHECKING
 
 from django.core.management.base import BaseCommand
 
-from products.sdk.wb.file_sdk import FileWbSdk
+from products.sdk.wb.web_sdk import WebWbSdk
 from products.services.events import ProductsCreateEvent, ProductsUpdateEvent
 from products.services.product_updater import ProductUpdater
 
@@ -23,7 +23,7 @@ class Command(BaseCommand):
         create_subscribe = ProductsCreateEvent.register(self.handle_create_products)
         update_subscribe = ProductsUpdateEvent.register(self.handle_update_products)
         search_text = options["search_text"]
-        wb_sdk = FileWbSdk()
+        wb_sdk = WebWbSdk()
         product_updater = ProductUpdater(wb_sdk)
         product_updater(search_text)
         create_subscribe.disable()
