@@ -1,4 +1,4 @@
-from django_filters import FilterSet, NumberFilter, ChoiceFilter
+from django_filters import FilterSet, NumberFilter, ChoiceFilter, OrderingFilter
 
 RATING_CHOICES = (
     (1, "⭐"),
@@ -16,3 +16,12 @@ class ProductFilterSet(FilterSet):
     max_rating = ChoiceFilter("rating", "lte", choices=RATING_CHOICES)
     min_review_count = NumberFilter("review_count", "gte")
     max_review_count = NumberFilter("review_count", "lte")
+    ordering = OrderingFilter(
+        fields=(
+            ("name", "name"),
+            ("price", "price"),
+            ("discount_price", "discount_price"),
+            ("rating", "rating"),
+            ("review_count", "review_count"),
+        )
+    )

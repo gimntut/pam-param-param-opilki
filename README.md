@@ -14,7 +14,9 @@
 
 ## Запуск приложения
 * `./manage.py runserver`
-* Открыть http://localhost:8000
+  * Приложение: http://localhost:8000
+  * DRF UI: http://localhost:8000/api/products/
+  * Swagger UI: http://localhost:8000/api/schema/swagger-ui/#/products/products_list
 
 ## Смотри также
 * [Задание](docs/task.md)

@@ -1,6 +1,5 @@
 import json
 
-from django.conf import settings
 from django.core.paginator import Paginator
 from django.db.models import Min, Max, Count, Q, Avg
 from django.utils.safestring import mark_safe
