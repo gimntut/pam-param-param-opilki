@@ -4,6 +4,7 @@ import requests
 
 from products.sdk.wb.helpers import get_product_dto_map
 from products.services.interfaces import IWbSdk, ProductDtoMap
+
 # Лень разбираться, какие параметры за что отвечают, поэтому оставляем все, как есть
 DEFAULT_PARAMS: Final = {
     "ab_testing": "false",

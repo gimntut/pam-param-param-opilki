@@ -43,8 +43,14 @@ class ProductListView(ListView):
             filter_form=self.form,
             bar_series=bar_series,
             line_series=line_series,
+            ordering=self.next_ordering,
             **price_range,
         )
+
+    def get_template_names(self):
+        if self.request.htmx:
+            return ["products/partials/product_table.html"]
+        return super().get_template_names()
 
     @staticmethod
     def get_bar_series(qs, min_available_price, max_available_price) -> list[BarSeries]:
@@ -81,10 +87,29 @@ class ProductListView(ListView):
             data.append({"x": str(rating), "y": round(discount)})
         return [{"data": data}]
 
-    def get_template_names(self):
-        if self.request.htmx:
-            return ["products/partials/product_table.html"]
-        return super().get_template_names()
+    @property
+    def next_ordering(self):
+        ordering = (self.request.GET.get("ordering") or "").split(",")
+        result = {}
+        for column in ("name", "price", "rating", "review_count"):
+            desc_sort = f"-{column}"
+            if column in ordering:
+                result[column] = {
+                    "value": desc_sort,
+                    "emoji": '👇',
+                }
+            elif desc_sort in ordering:
+                result[column] = {
+                    "value": None,
+                    "emoji": '👆',
+                }
+            else:
+                result[column] = column
+                result[column] = {
+                    "value": column,
+                    "emoji": '',
+                }
+        return result
 
     @property
     def form(self):

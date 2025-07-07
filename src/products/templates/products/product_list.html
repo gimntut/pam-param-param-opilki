@@ -5,9 +5,11 @@
 {% endblock %}
 {% block content %}
     <h1>Товары</h1>
-    {% include 'products/partials/filterset.html' %}
-    {% include 'products/partials/charts.html' %}
-    <div id='product-table'>
-        {% include 'products/partials/product_table.html' %}
+    <div hx-target="#product-table" hx-push-url="true">
+        {% include 'products/partials/filterset.html' %}
+        {% include 'products/partials/charts.html' %}
+        <div id='product-table'>
+            {% include 'products/partials/product_table.html' %}
+        </div>
     </div>
 {% endblock %}

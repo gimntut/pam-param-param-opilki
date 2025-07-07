@@ -20,7 +20,6 @@ class ProductFilterSet(FilterSet):
         fields=(
             ("name", "name"),
             ("price", "price"),
-            ("discount_price", "discount_price"),
             ("rating", "rating"),
             ("review_count", "review_count"),
         )

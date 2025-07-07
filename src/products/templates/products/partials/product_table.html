@@ -1,11 +1,13 @@
 {% if page_obj.object_list.count %}
     <table class="products">
-        <tr>
-            <th>Название товара</th>
-            <th>Цена</th>
+        <tr hx-boost="true">
+            <th><a href="{% querystring ordering=ordering.name.value %}">Название товара</a> {{ ordering.name.emoji }}
+            </th>
+            <th><a href="{% querystring ordering=ordering.price.value %}">Цена</a> {{ ordering.price.emoji }}</th>
             <th>Цена со скидкой</th>
-            <th>Рейтинг</th>
-            <th>Количество отзывов</th>
+            <th><a href="{% querystring ordering=ordering.rating.value %}">Рейтинг</a> {{ ordering.rating.emoji }}</th>
+            <th><a href="{% querystring ordering=ordering.review_count.value %}">Количество
+                отзывов</a> {{ ordering.review_count.emoji }}</th>
         </tr>
         {% for product in page_obj %}
             <tr class="product">

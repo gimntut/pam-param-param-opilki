@@ -59,3 +59,7 @@ td {
 .charts {
     max-height: 200px;
 }
+
+th > a {
+    color: white;
+}
